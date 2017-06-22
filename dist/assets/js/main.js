@@ -14054,6 +14054,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
     var App = Vue.extend();
     var postList = Vue.extend({
+        el: '#app',
+        router: router,
         template: '#post-list-template',
         data: function() {
             return {
@@ -14066,7 +14068,7 @@ return /******/ (function(modules) { // webpackBootstrap
                 show: false
             };
         },
-        ready: function() {
+        mounted: function() {
             var posts = this.$resource('http://restapi.li1.home-trial.com/wp-json/wp/v2/posts?per_page=20'),
                 categories = this.$resource('http://restapi.li1.home-trial.com/wp-json/wp/v2/categories');
 
@@ -14115,22 +14117,17 @@ return /******/ (function(modules) { // webpackBootstrap
         }
     });
 
-
-
     var router = new VueRouter({
-        history: true
-    });
-
-    router.map({
-        '/': {
-            component: postList,
-        },
-        ':postSlug': {
-            name: 'post',
-            component: singlePost
-        }
-    });
-
-    router.start(App, '#app');
+        mode: 'history',
+        routes: [{
+            '/': {
+                component: postList,
+            },
+            ':postSlug': {
+                name: 'post',
+                component: singlePost
+            }
+        }]
+    })
 
 }());
