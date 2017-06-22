@@ -1,0 +1,322 @@
+.container {
+    @include clearfix;
+    width: 1170px;
+    position: relative;
+    margin: 0 auto;
+    background-color: $white;
+    @include bp-lg {
+        width: 970px;
+    }
+    @include bp-md {
+        width: 750px;
+    }
+    @include bp-sm {
+        width: 100%;
+    }
+}
+
+.pad {
+    padding: 0 1rem;
+}
+
+.orange-btn {
+    background-color: $accent-color;
+}
+
+// Header
+.main-header {
+    margin-bottom: 1rem;
+    img {
+        width: 100%;
+    }
+}
+
+// Posts
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    @include box-shadow(2px, .25);
+    flex: 1;
+    margin: 1rem;
+    flex-basis: 30%;
+    max-width: 35%;
+    background-color: $primary-color;
+    color: $primary-color-text;
+    display: flex;
+    flex-direction: column;
+    @include bp-lg {
+        max-width: 55%;
+    }
+    @include bp-sm {
+        flex-basis: 40%;
+    }
+    @include bp-xs {
+        flex-basis: 50%;
+        max-width: none;
+    }
+    img {
+        width: 100%;
+    }
+    a {
+        cursor: pointer;
+    }
+}
+
+.post-content {
+    padding: 1rem;
+    flex: 1; // flex-grow: 1; flex-shrink: 1; flex-basis: auto;
+    display: flex;
+    flex-direction: column;
+    .btn {
+        @include font-size(12px);
+        background-color: $primary-color-dark;
+        text-align: left;
+        display: inline-block;
+        border-radius: $border-radius;
+        padding: .25em .5em;
+        margin: 0 .5em 0 0;
+    }
+    h2 {
+        text-align: center;
+        flex-grow: 1;
+    }
+}
+
+.btns {
+    text-align: left;
+    width: 100%;
+    margin: 0 0 -.25em 0;
+}
+
+// Post Preview
+.single-preview {
+    @include box-shadow(4px);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75%;
+    height: 100%;
+    background-color: $background-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    z-index: $z-post-preview;
+    h2,
+    img,
+    p {
+        padding: 0 1rem 1.5em;
+        width: 66.666%;
+        max-width: 1300px;
+        @include bp-md {
+            width: 75%;
+        }
+        @include bp-sm {
+            width: 100%;
+        }
+    }
+    p {
+        padding: 0 1rem 0;
+    }
+}
+
+.prev,
+.next {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: $accent-color;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color .15s ease-in;
+    &:hover {
+        background-color: $accent-color-dark;
+    }
+    &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('dist/assets/img/svg/arrow.svg');
+        background-size: 18px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        transition: transform .1s ease-in;
+    }
+}
+
+.next {
+    right: 1rem;
+    &::before {
+        transform: rotate(-90deg) translate3d(0, 0, 0);
+    }
+    &:active::before {
+        transform: rotate(-90deg) translate3d(0, 2px, 0);
+    }
+}
+
+.prev {
+    left: 1rem;
+    &::before {
+        transform: rotate(90deg) translate3d(0, 0, 0);
+    }
+    &:active::before {
+        transform: rotate(90deg) translate3d(0, 2px, 0);
+    }
+}
+
+.close {
+    @include font-size(32px);
+    line-height: 1;
+    position: absolute;
+    top: 1rem;
+    left: -36px;
+    border: none;
+    background-color: $background-color;
+    color: $primary-text-color;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    outline: none;
+    transition: color .3s ease-out;
+    &:hover {
+        color: $accent-color-dark;
+    }
+}
+
+// Post Preview Overlay
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: $z-post-preview-overlay;
+}
+
+// Filters
+.filters {
+    @include box-shadow(6px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: $z-filters;
+    transition: transform .5s ease-out;
+    backface-visibility: hidden;
+    transform: translate3d(0, -102%, 0);
+    h4 {
+        display: block;
+    }
+    input {
+        @include roboto(500);
+        @include font-size(16px);
+        padding: .25em .5em;
+        outline: none;
+        transition: border .35s ease-out;
+        border: 1px lighten($primary-text-color, 45%) solid;
+        float: left;
+        &:hover,
+        &:active,
+        {
+            border: 1px $primary-text-color solid;
+        }
+    }
+    .container {
+        background-color: $background-color;
+        padding: 1rem 0;
+    }
+    &.filter-active {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.filter-revealer {
+    background-color: $background-color;
+    margin-bottom: 1rem;
+    a {
+        color: $primary-color-text;
+        cursor: pointer;
+        float: left;
+        display: block;
+    }
+}
+
+.filter {
+    float: left;
+    width: 100%;
+}
+
+.name-filter {
+    input {
+        margin-bottom: 1.5em;
+        width: 100%;
+    }
+}
+
+.radio-wrap {
+    float: left;
+    input,
+    label {
+        padding: .25em .5em 0 0;
+        margin: 3px 3px 0 0;
+    }
+}
+
+// Single Post Template
+.single-post {
+    @include clearfix;
+    padding: 0 2rem 1rem;
+    @include bp-sm {
+        padding: 0 1rem 1rem;
+    }
+    h1 {
+        text-align: center;
+        margin: 1em 0;
+        width: 100%;
+        display: inline-block;
+        color: $primary-color-dark;
+    }
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: $primary-color-dark;
+        margin: 0 0 1.5em 0;
+    }
+    .post-img {
+        margin-bottom: 3rem;
+    }
+    .post-content {
+        margin: 1em 0;
+        padding: 0;
+        img {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+    }
+    a {
+        color: $primary-color;
+    }
+    ul,
+    ol {
+        margin-bottom: 1.5em;
+    }
+    li {
+        list-style-type: disc;
+        margin: 0 1.5rem;
+    }
+    blockquote {
+        margin-bottom: 1.5em;
+    }
+}

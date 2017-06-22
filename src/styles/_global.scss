@@ -1,0 +1,75 @@
+body {
+    @include font-size(16px);
+    @include font-smoothing;
+    @include roboto(500);
+    background-color: $background-color;
+    color: $primary-text-color;
+}
+
+// Copy
+.large-heading,
+.medium-heading,
+.small-heading h1,
+h2,
+h3,
+h4,
+h5 {
+    @include font-size(32px);
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: .5em;
+    width: 100%;
+    @include bp-lg {
+        @include font-size(30px);
+    }
+    @include bp-sm {
+        @include font-size(28px);
+    }
+}
+
+.medium-heading,
+h2 {
+    @include font-size(25px);
+    margin-bottom: .5em;
+    @include bp-lg {
+        @include font-size(24px);
+    }
+}
+
+.small-heading,
+h3,
+h4,
+h5 {
+    @include font-size(20px);
+    margin-bottom: .5em;
+}
+
+p {
+    margin-bottom: 1.5em;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Buttons
+.btn {
+    @include font-size(16px);
+    background-color: $accent-color;
+    border-radius: 5px;
+    color: $primary-color-text;
+    cursor: pointer;
+    display: block;
+    filter: brightness(100%);
+    float: left;
+    margin-right: 1em;
+    padding: .5em .75em;
+    transition: filter .3s ease;
+    // -webkit-tap-highlight-color: $black;
+    &:hover,
+    &:active {
+        filter: brightness(95%);
+    }
+    &:last-of-type {
+        margin-right: 0;
+    }
+}

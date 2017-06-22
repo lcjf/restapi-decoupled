@@ -1,0 +1,121 @@
+// Table of Contents
+// Calculate REM: REM font sizes are relative to the font size set on the HTML element
+// Fonts: Font mixins with customisable weights and styles
+// Font smoothing: Don't use if texts loses readability (works best for text on a dark background)
+// Non mobile first Breakpoints: Base styles at largest viewport
+// Misc Breakpoints: "Greater than" targetting, and height detection (which may be useful for tweaking menus)
+// Clearfix: Atomatically clear its child elements
+// Visually hide an element: Screen readers can still detect this information
+// Set REM font size with pixel fallback
+@function calculate-rem($size) {
+  $rem-size: $size / 16px;
+  @return $rem-size * 1rem;
+}
+@mixin font-size($size: 14, $line: $size * 1.4) {
+  font-size: $size;
+  line-height: $line;
+  font-size: calculate-rem($size);
+  line-height: calculate-rem($line);
+}
+@mixin font-size-heading($size: 14, $line: $size * 1.15) {
+  font-size: $size;
+  line-height: $line;
+  font-size: calculate-rem($size);
+  line-height: calculate-rem($line);
+}
+// Fonts
+@mixin arial($weight: normal, $style: normal) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+@mixin helvetica($weight: normal, $style: normal) {
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+@mixin roboto($weight: 400, $style: normal) {
+  font-family: 'Roboto', sans-serif;
+  font-weight: $weight;
+  font-style: $style;
+}
+// Font smoothing
+@mixin font-smoothing($value: antialiased) {
+   @if $value == antialiased{
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+// Non mobile first Breakpoints
+@mixin bp-lg {
+   @media only screen and (max-width: 1200px){
+    @content;
+  }
+}
+@mixin bp-md {
+   @media only screen and (max-width: 992px){
+    @content;
+  }
+}
+@mixin bp-sm {
+   @media only screen and (max-width: 767px){
+    @content;
+  }
+}
+@mixin bp-xs {
+   @media only screen and (max-width: 479px){
+    @content;
+  }
+}
+@mixin bp-xxs {
+   @media only screen and (max-width: 320px){
+    @content;
+  }
+}
+// Misc Breakpoints
+@mixin bp-height-small {
+   @media only screen and (max-height: 400px){
+    @content;
+  }
+}
+@mixin bp-gt-sm {
+   @media only screen and (min-width: 768px){
+    @content;
+  }
+}
+@mixin bp-gt-xs {
+   @media only screen and (min-width: 480px){
+    @content;
+  }
+}
+// Clearfix
+@mixin clearfix {
+  &::after,
+  &::before {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+// Box Shadow
+@mixin box-shadow($pos: 2px, $opacity: .15) {
+   box-shadow: (0 - $pos) $pos 5px 0px rgba(0, 0, 0, $opacity);
+}
+// Visually hide an element
+@mixin visually-hidden {
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
+}
